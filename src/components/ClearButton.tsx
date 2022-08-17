@@ -1,12 +1,12 @@
 import React from 'react'
 
-interface DeleteButtonProps{
+interface ClearButtonProps{
    handleClearDigit:()=> void;
    className?: string; 
    digit: string;
 }
 
-const DeleteButton = ({handleClearDigit ,className ,digit}:DeleteButtonProps) =>  {
+const ClearButton = ({handleClearDigit ,className ,digit}:ClearButtonProps) =>  {
   return (
     <button className={className} onClick={() => { handleClearDigit()} }>
     {digit}
@@ -14,4 +14,4 @@ const DeleteButton = ({handleClearDigit ,className ,digit}:DeleteButtonProps) =>
   )
 }
 
-export default DeleteButton
+export default ClearButton

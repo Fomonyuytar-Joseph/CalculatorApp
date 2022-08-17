@@ -3,8 +3,9 @@ import "./styles.css";
 import Button from "./components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./store";
-import { addDigit, clearDigit } from "./store/features/digitSlice";
-import DeleteButton from "./components/DeleteButton";
+import { addDigit, clearDigit, removeLastDigit } from "./store/features/digitSlice";
+import ClearButton from "./components/ClearButton";
+import RemoveLastDigitButton from "./components/RemoveLastDigitButton";
 
 function App() {
   // const [pressedDigit, setPressedDigit] = useState<string>('')
@@ -23,6 +24,11 @@ function App() {
     dispatch(clearDigit());
   };
 
+  const handleRemoveLastDigit =()=>{
+
+    dispatch(removeLastDigit())
+  }
+
   return (
     // grid container
     <div className="container">
@@ -33,11 +39,12 @@ function App() {
         <div className="container__screen--result">{digits}</div>
       </div>
 
-      <Button digit="AC" className=" btn--span-two btn--white" />
-      <DeleteButton
+      <ClearButton digit="AC" className=" btn--span-two btn--white"  handleClearDigit={handleClearDigit}/>
+      <RemoveLastDigitButton
         digit="DEL"
         className="btn--white"
-        handleClearDigit={handleClearDigit}
+        handleRemoveLastDigit={handleRemoveLastDigit}
+        
       />
       <Button digit="÷" className="btn--cirlcular-border" />
       <Button
@@ -72,12 +79,28 @@ function App() {
         handleAddDigits={handleAddDigits}
       />
       <Button digit="+" className="btn--cirlcular-border " />
-      <Button digit="7" className="btn--white" />
-      <Button digit="8" className="btn--white" />
-      <Button digit="9" className="btn--white" />
+      <Button
+        digit="7"
+        className="btn--white"
+        handleAddDigits={handleAddDigits}
+      />
+      <Button
+        digit="8"
+        className="btn--white"
+        handleAddDigits={handleAddDigits}
+      />
+      <Button
+        digit="9"
+        className="btn--white"
+        handleAddDigits={handleAddDigits}
+      />
       <Button digit="-" className="btn--cirlcular-border" />
       <Button digit="." className="btn--white" />
-      <Button digit="0" className="btn--white" />
+      <Button
+        digit="0"
+        className="btn--white"
+        handleAddDigits={handleAddDigits}
+      />
       <Button
         digit="="
         className=" btn--span-threeTofour btn--cirlcular-border"
