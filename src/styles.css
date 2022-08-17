@@ -26,36 +26,36 @@ body {
   background-color: #b9a7ff;
 }
 
-.button--span-two {
+.btn--span-two {
   grid-column: span 2;
   color: #b9a7ff;
 }
 
-.button--span-threeTofour {
+.btn--span-threeTofour {
   grid-column: 4/5;
   background-color: #7c5efe;
   color: white;
 }
 
-.button--cirlcular-border {
+.btn--cirlcular-border {
   border-radius: 80%;
   padding: 5px;
   margin: 10px;
   text-align: center;
 }
 
-.container > input {
+.container > button {
   cursor: pointer;
   font-size: 2rem;
   border: 1px solid white;
   outline: none;
 }
 
-.button--white {
+.btn--white {
   background-color: white;
 }
 
-.container > input:hover {
+.container > button:hover {
   background-color: #b9a7ff;
   color: white;
 }

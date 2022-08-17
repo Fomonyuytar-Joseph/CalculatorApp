@@ -12,17 +12,25 @@ export const digitSlice =  createSlice({
     initialState,
     reducers:{
         addDigit:(state ,action:PayloadAction<string>)=>{
-         {
+        return  {
                 currentOperand:`${state.currentOperand || " " }${action.payload}`
             }
+        },
+        clearDigit:( )=>{
+             
+            return {
+                currentOperand:""
+            }
+
         }
 
     }
 
+
 }) 
 
 
-export const {addDigit}= digitSlice.actions
+export const {addDigit ,clearDigit}= digitSlice.actions
 
 
 export default digitSlice.reducer

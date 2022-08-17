@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import digitsReducer from './features/digitSlice'
 
 
 
@@ -6,6 +7,8 @@ import { configureStore } from "@reduxjs/toolkit";
 export const store =configureStore({
 
     reducer:{
+
+        digits:digitsReducer
 
     }
 })

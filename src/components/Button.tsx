@@ -1,15 +1,23 @@
+import React from "react";
 
-import React from 'react'
-
-interface ButtonProps{
-    digit:string,
-    className?:string
+interface ButtonProps {
+  digit: string;
+  handleAddDigits?: (pressedDigit: string) => void;
+  className?: string;
+  
 }
 
-const Button=({digit ,className}:ButtonProps) => {
+const Button = ({
+  digit,
+  className,
+  handleAddDigits,
+  
+}: ButtonProps) => {
   return (
-    <input className={className}  type="button" value={digit}/>
-  )
-}
+    <button className={className} onClick={() => { handleAddDigits?.(digit)} }>
+      {digit}
+    </button>
+  );
+};
 
-export default Button
+export default Button;
