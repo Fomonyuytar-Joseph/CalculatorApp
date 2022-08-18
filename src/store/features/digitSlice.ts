@@ -1,35 +1,87 @@
 import { createSlice ,PayloadAction } from "@reduxjs/toolkit";
 
-const initialState= {
-    currentOperand:""
+
+interface CalculatorState{
+    currrentOperand:string;
+        prevOperand?: string;
+        operation?:string;
+    }
+
+
+
+
+
+
+
+
+const initialState : CalculatorState= {
+  
+    
+        currrentOperand:"",
+        prevOperand:"",
+        operation:""
+    
+    
+
 }
+
+
 
 
 
 export const digitSlice =  createSlice({
 
-    name :"digits",
+    name :"CalculatorState",
     initialState,
+
     reducers:{
-        addDigit:(state ,action:PayloadAction<string>)=>{
+
+        addDigit:(state , action:PayloadAction<string>)=>{
+            if(state.currrentOperand === '0'&& action.payload ==='0'){
+                return  state;
+
+            }
+            if(state.currrentOperand.includes('.')  && action.payload ==='.'){
+                return state;
+
+            }
         return  {
-                currentOperand:`${state.currentOperand || "" }${action.payload}`
+        
+                
+                    ...state,
+                    currrentOperand:`${state.currrentOperand || "" }${action.payload}` 
+                    
+                                     
+                
+                    
+                
             }
         },
-        clearDigit:( )=>{
+
+        clearDigit:(state)=>{
              
             return {
-                currentOperand:""
+                ...state,
+                currrentOperand:"",
+                prevOperand:"",
+                operation:""
+
+                
             }
 
         },
         removeLastDigit: (state )=>{
+            const remainingDigit:string=`${state.currrentOperand.slice(0, -1)}`
 
-            return {
-                currentOperand: `${state.currentOperand.slice(0, -1)}`
-            }
+            return   { ...state, currrentOperand:remainingDigit }
+                
+               
+                
+            
     
         }
+
+        
 
     }
    
