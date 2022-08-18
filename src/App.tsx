@@ -5,12 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./store";
 import {
   addDigit,
+  chooseOperation,
   clearDigit,
+  performEvaluation,
   removeLastDigit,
 } from "./store/features/digitSlice";
 import ClearButton from "./components/ClearButton";
 import RemoveLastDigitButton from "./components/RemoveLastDigitButton";
 import OperationButton from "./components/OperationButton";
+import EvaluateButton from "./components/EvaluateButton";
 
 function App() {
   // const [pressedDigit, setPressedDigit] = useState<string>('')
@@ -19,10 +22,13 @@ function App() {
 
   const dispatch = useDispatch();
 
+  console.log("prevoperand:", digits.prevOperand);
+  console.log("currentperand:", digits.currentOperand);
+
   const handleAddDigits = (pressedDigit: string) => {
     dispatch(addDigit(pressedDigit));
-
-    console.log("hi");
+    console.log("hello");
+    console.log(digits.currentOperand);
   };
 
   const handleClearDigit = () => {
@@ -30,8 +36,18 @@ function App() {
   };
 
   const handleRemoveLastDigit = () => {
-    console.log("hello")
+    console.log("hello");
     dispatch(removeLastDigit());
+  };
+
+  const handleChooseOperation = (pressedOperation: string) => {
+    dispatch(chooseOperation(pressedOperation));
+
+    console.log("operation clicked", digits.prevOperand);
+  };
+
+  const handleEvaluation = () => {
+    dispatch(performEvaluation());
   };
 
   return (
@@ -39,9 +55,11 @@ function App() {
     <div className="container">
       {/* output screen of calculator */}
       <div className="container__screen">
-        <div className="container__screen--calculation">23</div>
+        <div className="container__screen--calculation">
+          {digits.prevOperand} {digits.operation}
+        </div>
 
-        <div className="container__screen--result">{ digits.currrentOperand }</div>
+        <div className="container__screen--result">{digits.currentOperand}</div>
       </div>
 
       <ClearButton
@@ -55,7 +73,11 @@ function App() {
         handleRemoveLastDigit={handleRemoveLastDigit}
       />
 
-      <OperationButton operation="÷" className="btn--cirlcular-border" />
+      <OperationButton
+        operation="÷"
+        className="btn--cirlcular-border"
+        handleChooseOperation={handleChooseOperation}
+      />
 
       <Button
         digit="1"
@@ -73,7 +95,11 @@ function App() {
         handleAddDigits={handleAddDigits}
       />
 
-      <OperationButton operation="×" className="btn--cirlcular-border" />
+      <OperationButton
+        handleChooseOperation={handleChooseOperation}
+        operation="×"
+        className="btn--cirlcular-border"
+      />
 
       <Button
         digit="4"
@@ -91,7 +117,11 @@ function App() {
         handleAddDigits={handleAddDigits}
       />
 
-      <OperationButton operation="+" className="btn--cirlcular-border " />
+      <OperationButton
+        operation="+"
+        className="btn--cirlcular-border "
+        handleChooseOperation={handleChooseOperation}
+      />
 
       <Button
         digit="7"
@@ -109,7 +139,11 @@ function App() {
         handleAddDigits={handleAddDigits}
       />
 
-      <OperationButton operation="-" className="btn--cirlcular-border" />
+      <OperationButton
+        operation="-"
+        className="btn--cirlcular-border"
+        handleChooseOperation={handleChooseOperation}
+      />
 
       <Button
         digit="."
@@ -123,8 +157,9 @@ function App() {
         handleAddDigits={handleAddDigits}
       />
 
-      <Button
-        digit="="
+      <EvaluateButton
+        equalDigit="="
+        handleEvaluation={handleEvaluation}
         className=" btn--span-threeTofour btn--cirlcular-border"
       />
     </div>
