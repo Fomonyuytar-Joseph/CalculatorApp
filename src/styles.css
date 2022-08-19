@@ -10,7 +10,7 @@ body {
   grid-template-columns: repeat(4, 6rem);
   margin-top: 2rem;
   justify-content: center;
-  grid-template-rows: minmax(7rem, auto) repeat(5, 6rem);
+  grid-template-rows: minmax(7rem, 7rem) repeat(5, 6rem);
 }
 
 .container__screen {
@@ -22,6 +22,7 @@ body {
   justify-content: space-around;
   padding: 20px;
   color: white;
+  border-radius: 5px;
 
   background-color: #b9a7ff;
 }
@@ -49,6 +50,9 @@ body {
   font-size: 2rem;
   border: 1px solid white;
   outline: none;
+  
+  
+  
 }
 
 .btn--white {
@@ -61,5 +65,5 @@ body {
 }
 
 .container__screen--calculation , .container__screen--result{
-  font-size: 2em;
+  font-size: 30px;
 }

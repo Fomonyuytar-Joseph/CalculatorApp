@@ -2,6 +2,7 @@ import { createSlice ,PayloadAction } from "@reduxjs/toolkit";
 
 
 
+// interface of the state of the app
 interface CalculatorState{
     currentOperand:string;
         prevOperand: string;
@@ -9,12 +10,7 @@ interface CalculatorState{
     }
 
 
-
-
-
-
-
-
+    // default state 
 const initialState : CalculatorState= {
   
     
@@ -24,18 +20,17 @@ const initialState : CalculatorState= {
     
 }
 
-
-
-
+//function  to give results based on the operation choosen
 const Evaluate= ({currentOperand ,prevOperand ,operation}:CalculatorState) => {
 
     const current = parseFloat(currentOperand)
     const prev = parseFloat(prevOperand)
-
+    //return empty string if both operands ane not numbers
     if(isNaN(current) || isNaN(prev)) return ""
  
        let result: string | number=""
 
+       // handle the individual arithmetic operar=tions
     switch (operation){
         case "+":
             result=  prev + current
@@ -57,16 +52,14 @@ const Evaluate= ({currentOperand ,prevOperand ,operation}:CalculatorState) => {
 }
 
 
-
-
-
+//Digit Slice in the redux toolkit
 export const digitSlice =  createSlice({
 
     name :"CalculatorState",
     initialState,
 
     reducers:{
-
+       //handle adding digit behinf the other when clicked
         addDigit:(state , action:PayloadAction<string>)=>{
             if(state.currentOperand === '0'&& action.payload ==='0'){
                 return  state;
@@ -76,9 +69,12 @@ export const digitSlice =  createSlice({
                 return state;
 
             }
-        return  { ...state, currentOperand:`${state.currentOperand || " " }${action.payload}` }
+
+            const addedDigit: string=`${state.currentOperand || " " }${action.payload}`
+        return  { ...state, currentOperand:addedDigit }
         },
 
+          //clearing the screen
         clearDigit:(state)=>{
              
             return {
@@ -91,6 +87,8 @@ export const digitSlice =  createSlice({
             }
 
         },
+
+        //delele last digit
         removeLastDigit: (state )=>{
             const remainingDigit:string=`${state.currentOperand.slice(0, -1)}`
 
@@ -101,6 +99,8 @@ export const digitSlice =  createSlice({
             
     
         },
+
+        //choose operation whether + - * 
         chooseOperation:(state , action:PayloadAction<string> ) => {
 
             if(state.prevOperand === ""){
@@ -109,10 +109,40 @@ export const digitSlice =  createSlice({
 
             }
 
-            return {...state , prevOperand:Evaluate(state),currentOperand:"",operation:""}
+            if (state.currentOperand == "" && state.prevOperand == "") {
+                return state 
+                  
+
+                
+              }
+              
+              
+              if (state.currentOperand == "") {
+                return {
+                  ...state,
+                  operation: "",
+                }
+              }
+
+
+
+            return {...state , 
+                prevOperand:Evaluate(state),
+                currentOperand:"",
+                operation:""
+            
+            }
         },
 
+        //when user clicks =
         performEvaluation:( state )=>{
+
+            if (
+                state.operation == null ||
+                state.currentOperand == null ||
+                state.prevOperand == null
+              ) {
+                return state }
 
             return {
                 ...state,
@@ -131,7 +161,7 @@ export const digitSlice =  createSlice({
 
 }) 
 
-
+//sending our actions to be used in App.tsx
 export const {addDigit ,clearDigit ,removeLastDigit ,chooseOperation ,performEvaluation}= digitSlice.actions
 
 

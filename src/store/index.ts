@@ -3,7 +3,7 @@ import digitsReducer from './features/digitSlice'
 
 
 
-
+//creating the store
 export const store =configureStore({
 
     reducer:{

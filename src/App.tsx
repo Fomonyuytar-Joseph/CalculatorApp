@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles.css";
-import Button from "./components/Button";
+
+// imports related to redux toolkit and state managemet
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./store";
 import {
@@ -10,24 +11,29 @@ import {
   performEvaluation,
   removeLastDigit,
 } from "./store/features/digitSlice";
+
+//Components Button
+import Button from "./components/Button";
 import ClearButton from "./components/ClearButton";
 import RemoveLastDigitButton from "./components/RemoveLastDigitButton";
 import OperationButton from "./components/OperationButton";
 import EvaluateButton from "./components/EvaluateButton";
 
-function App() {
-  // const [pressedDigit, setPressedDigit] = useState<string>('')
+//utility function
+import {formatStringtoNumberWithComma} from "./utils/digitFormater"
 
+function App() {
+ 
+   //digit State
   const digits = useSelector((state: RootState) => state.digits);
 
   const dispatch = useDispatch();
 
-  console.log("prevoperand:", digits.prevOperand);
-  console.log("currentperand:", digits.currentOperand);
-
+ 
+   //Event handler
   const handleAddDigits = (pressedDigit: string) => {
     dispatch(addDigit(pressedDigit));
-    console.log("hello");
+    
     console.log(digits.currentOperand);
   };
 
@@ -36,30 +42,36 @@ function App() {
   };
 
   const handleRemoveLastDigit = () => {
-    console.log("hello");
+    
     dispatch(removeLastDigit());
   };
 
   const handleChooseOperation = (pressedOperation: string) => {
     dispatch(chooseOperation(pressedOperation));
 
-    console.log("operation clicked", digits.prevOperand);
+    console.log("operation clicked", digits.operation);
   };
 
   const handleEvaluation = () => {
     dispatch(performEvaluation());
   };
 
+ 
+
   return (
+    
     // grid container
     <div className="container">
       {/* output screen of calculator */}
       <div className="container__screen">
+        
         <div className="container__screen--calculation">
-          {digits.prevOperand} {digits.operation}
+          {formatStringtoNumberWithComma(digits.prevOperand)} {digits.operation}
         </div>
 
-        <div className="container__screen--result">{digits.currentOperand}</div>
+        <div className="container__screen--result">
+          {formatStringtoNumberWithComma(digits.currentOperand)}
+        </div>
       </div>
 
       <ClearButton
