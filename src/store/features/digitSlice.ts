@@ -7,6 +7,7 @@ interface CalculatorState{
     currentOperand:string;
         prevOperand: string;
         operation:string;
+        overwrite:boolean;
     }
 
 
@@ -16,7 +17,8 @@ const initialState : CalculatorState= {
     
         currentOperand:"",
         prevOperand:"",
-        operation:""
+        operation:"",
+        overwrite:false
     
 }
 
@@ -61,6 +63,14 @@ export const digitSlice =  createSlice({
     reducers:{
        //handle adding digit behinf the other when clicked
         addDigit:(state , action:PayloadAction<string>)=>{
+
+            if(state.overwrite){
+                return {
+                    ...state,
+                    overwrite: false,
+                    currentOperand: action.payload,
+                  }
+            }
             if(state.currentOperand === '0'&& action.payload ==='0'){
                 return  state;
 
@@ -128,7 +138,8 @@ export const digitSlice =  createSlice({
             return {...state , 
                 prevOperand:Evaluate(state),
                 currentOperand:"",
-                operation:action.payload
+                operation:action.payload,
+                
             
             }
         },
@@ -147,7 +158,8 @@ export const digitSlice =  createSlice({
                 ...state,
                 currentOperand:Evaluate(state),
                 prevOperand:"",
-                operation:""
+                operation:"",
+                overwrite:true
                
             }
         }
