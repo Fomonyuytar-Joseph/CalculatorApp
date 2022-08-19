@@ -29,6 +29,8 @@ function App() {
 
   const dispatch = useDispatch();
 
+  console.log("prevoperand", digits.currentOperand)
+
  
    //Event handler
   const handleAddDigits = (pressedDigit: string) => {

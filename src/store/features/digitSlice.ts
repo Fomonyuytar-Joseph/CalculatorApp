@@ -103,33 +103,32 @@ export const digitSlice =  createSlice({
         //choose operation whether + - * 
         chooseOperation:(state , action:PayloadAction<string> ) => {
 
-            if(state.prevOperand === ""){
-
-                return{ ...state , operation:action.payload , prevOperand:state.currentOperand , currentOperand:""}
-
-            }
-
-            if (state.currentOperand == "" && state.prevOperand == "") {
+            if (state.currentOperand === "" && state.prevOperand === "") {
                 return state 
                   
 
                 
               }
-              
-              
-              if (state.currentOperand == "") {
+
+            if (state.currentOperand === "") {
                 return {
                   ...state,
-                  operation: "",
+                  operation: action.payload
+                  
                 }
               }
 
+            if(state.prevOperand === ""){
 
+                return{ ...state ,  currentOperand:"", prevOperand:state.currentOperand ,operation:action.payload }
 
+            }
+
+          
             return {...state , 
                 prevOperand:Evaluate(state),
                 currentOperand:"",
-                operation:""
+                operation:action.payload
             
             }
         },
@@ -138,9 +137,9 @@ export const digitSlice =  createSlice({
         performEvaluation:( state )=>{
 
             if (
-                state.operation == null ||
-                state.currentOperand == null ||
-                state.prevOperand == null
+                state.operation === "" ||
+                state.currentOperand === "" ||
+                state.prevOperand === ""
               ) {
                 return state }
 
