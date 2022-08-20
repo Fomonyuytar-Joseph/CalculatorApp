@@ -22,10 +22,13 @@ import EvaluateButton from "./components/EvaluateButton";
 //utility function
 import {formatStringtoNumberWithComma} from "./utils/digitFormater"
 
+
 function App() {
  
    //digit State
   const digits = useSelector((state: RootState) => state.digits);
+
+  const themeState = useSelector((state:RootState)=> state.theme)
 
   const dispatch = useDispatch();
 
@@ -39,8 +42,17 @@ function App() {
     console.log(digits.currentOperand);
   };
 
+
+
+   let buttonColor:string;
+
+   buttonColor = themeState.darkTheme? "btn--dark":"btn--white"
+  
+
   const handleClearDigit = () => {
     dispatch(clearDigit());
+    
+
   };
 
   const handleRemoveLastDigit = () => {
@@ -75,15 +87,16 @@ function App() {
           {formatStringtoNumberWithComma(digits.currentOperand)}
         </div>
       </div>
-
+        
+        
       <ClearButton
         digit="AC"
-        className=" btn--span-two btn--white"
+        className= {buttonColor}
         handleClearDigit={handleClearDigit}
       />
       <RemoveLastDigitButton
         digit="DEL"
-        className="btn--white"
+        className={buttonColor}
         handleRemoveLastDigit={handleRemoveLastDigit}
       />
 
@@ -95,17 +108,17 @@ function App() {
 
       <Button
         digit="1"
-        className="btn--white"
+        className={buttonColor}
         handleAddDigits={handleAddDigits}
       />
       <Button
         digit="2"
-        className="btn--white"
+        className={buttonColor}
         handleAddDigits={handleAddDigits}
       />
       <Button
         digit="3"
-        className="btn--white"
+        className={buttonColor}
         handleAddDigits={handleAddDigits}
       />
 
@@ -117,17 +130,17 @@ function App() {
 
       <Button
         digit="4"
-        className="btn--white"
+        className={buttonColor}
         handleAddDigits={handleAddDigits}
       />
       <Button
         digit="5"
-        className="btn--white"
+        className={buttonColor}
         handleAddDigits={handleAddDigits}
       />
       <Button
         digit="6"
-        className="btn--white"
+        className={buttonColor}
         handleAddDigits={handleAddDigits}
       />
 
@@ -139,17 +152,17 @@ function App() {
 
       <Button
         digit="7"
-        className="btn--white"
+        className={buttonColor}
         handleAddDigits={handleAddDigits}
       />
       <Button
         digit="8"
-        className="btn--white"
+        className={buttonColor}
         handleAddDigits={handleAddDigits}
       />
       <Button
         digit="9"
-        className="btn--white"
+        className={buttonColor}
         handleAddDigits={handleAddDigits}
       />
 
@@ -161,13 +174,13 @@ function App() {
 
       <Button
         digit="."
-        className="btn--white"
+        className={buttonColor}
         handleAddDigits={handleAddDigits}
       />
 
       <Button
         digit="0"
-        className="btn--white"
+        className={buttonColor}
         handleAddDigits={handleAddDigits}
       />
 

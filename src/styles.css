@@ -12,6 +12,8 @@ body {
   justify-content: center;
   grid-template-rows: minmax(7rem, 7rem) repeat(5, 6rem);
   
+  
+  
 }
 
 .container__screen {
@@ -44,6 +46,7 @@ body {
   padding: 5px;
   margin: 10px;
   text-align: center;
+  
 }
 
 .container > button {
@@ -67,4 +70,13 @@ body {
 
 .container__screen--calculation , .container__screen--result{
   font-size: 30px;
+}
+
+
+/* dark theme */
+
+.btn--dark{
+  background-color: #2f2a39;
+  color: #ffff;
+  
 }

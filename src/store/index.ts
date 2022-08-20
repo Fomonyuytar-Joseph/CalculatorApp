@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import digitsReducer from './features/digitSlice'
+import themeReducer from './features/ToggleSlice'
 
 
 
@@ -8,7 +9,8 @@ export const store =configureStore({
 
     reducer:{
 
-        digits:digitsReducer
+        digits:digitsReducer,
+        theme:themeReducer
 
     }
 })
