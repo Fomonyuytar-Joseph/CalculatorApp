@@ -98,7 +98,7 @@ export const digitSlice =  createSlice({
 
         },
 
-        //delele last digit
+        //delete last digit
         removeLastDigit: (state )=>{
             const remainingDigit:string=`${state.currentOperand.slice(0, -1)}`
 
