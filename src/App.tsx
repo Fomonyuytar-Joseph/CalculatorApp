@@ -99,7 +99,7 @@ function App() {
         className={buttonColor}
         handleRemoveLastDigit={handleRemoveLastDigit}
       />
-
+   
       <OperationButton
         operation="÷"
         className="btn--cirlcular-border"
